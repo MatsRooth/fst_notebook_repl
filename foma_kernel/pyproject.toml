@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "foma-kernel"
+version = "0.1.0"
+description = "A Jupyter kernel for the Foma finite-state toolkit"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [
+  {name = "Mats Rooth"}
+]
+requires-python = ">=3.9"
+
+dependencies = [
+  "ipykernel>=6.0",
+  "jupyter-client>=8.0",
+  "pexpect>=4.8",
+]
+
+[project.urls]
+Repository = "https://github.com/MatsRooth/foma-notebook"
+
+[project.scripts]
+foma-kernel = "foma_kernel.__main__:main"
+
+[tool.setuptools]
+packages = ["foma_kernel"]
+
+[tool.setuptools.package-data]
+foma_kernel = ["../kernelspec/*"]
