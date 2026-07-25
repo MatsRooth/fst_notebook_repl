@@ -1,8 +1,6 @@
 {
   "argv": [
-    "python",
-    "-m",
-    "foma_kernel",
+    "foma-kernel",
     "-f",
     "{connection_file}"
   ],

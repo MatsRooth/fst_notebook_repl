@@ -79,7 +79,9 @@ class FomaKernel(Kernel):
 
     def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
-        self.session = FomaSession()
+        # ``Kernel.session`` is a trait reserved for Jupyter's messaging
+        # session, so the child interpreter must use a different name.
+        self.foma_session = FomaSession()
 
     def do_execute(
         self,
@@ -157,11 +159,11 @@ class FomaKernel(Kernel):
         if cell.kind == "empty":
             return ""
         if cell.kind == "program":
-            return self.session.execute(cell.source)
+            return self.foma_session.execute(cell.source)
         if cell.kind == "apply_down":
-            return self.session.apply_down(cell.source)
+            return self.foma_session.apply_down(cell.source)
         if cell.kind == "apply_up":
-            return self.session.apply_up(cell.source)
+            return self.foma_session.apply_up(cell.source)
 
         raise CellSyntaxError(f"Unsupported parsed cell kind: {cell.kind!r}")
 
@@ -169,12 +171,12 @@ class FomaKernel(Kernel):
         """Run and publish post-cell notebook display directives."""
 
         if cell.directives.net:
-            output = self.session.print_net()
+            output = self.foma_session.print_net()
             if output:
                 self._publish_stream(output)
 
         if cell.directives.dot:
-            dot_source = self.session.print_dot()
+            dot_source = self.foma_session.print_dot()
             svg = dot_to_svg(dot_source)
             self._publish_display(
                 {
@@ -263,9 +265,8 @@ class FomaKernel(Kernel):
     def do_shutdown(self, restart: bool) -> dict[str, Any]:
         """Close the child Foma process when the Jupyter kernel stops."""
 
-        self.session.close()
+        self.foma_session.close()
         return {
             "status": "ok",
             "restart": restart,
         }
-
