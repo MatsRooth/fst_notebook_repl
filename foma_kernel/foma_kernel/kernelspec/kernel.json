@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "python",
+    "-m",
+    "foma_kernel",
+    "-f",
+    "{connection_file}"
+  ],
+  "display_name": "Foma",
+  "language": "foma",
+  "interrupt_mode": "signal"
+}

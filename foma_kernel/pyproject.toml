@@ -11,16 +11,15 @@ license = {text = "Apache-2.0"}
 authors = [
   {name = "Mats Rooth"}
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 dependencies = [
   "ipykernel>=6.0",
-  "jupyter-client>=8.0",
   "pexpect>=4.8",
 ]
 
 [project.urls]
-Repository = "https://github.com/MatsRooth/foma-notebook"
+Repository = "https://github.com/MatsRooth/fst_notebook_repl"
 
 [project.scripts]
 foma-kernel = "foma_kernel.__main__:main"
@@ -29,4 +28,5 @@ foma-kernel = "foma_kernel.__main__:main"
 packages = ["foma_kernel"]
 
 [tool.setuptools.package-data]
-foma_kernel = ["../kernelspec/*"]
+foma_kernel = ["kernelspec/*"]
+
