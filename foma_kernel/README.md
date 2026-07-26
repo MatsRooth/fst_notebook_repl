@@ -43,6 +43,7 @@ Register the kernel with Jupyter:
 
 ```bash
 jupyter kernelspec install --user \
+    --replace \
     foma_kernel/kernelspec \
     --name foma
 ```
